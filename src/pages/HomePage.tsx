@@ -4,11 +4,18 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { HomeBox } from "../components";
 import { RootState } from "../reducers";
+import TileBox from "../components/Tile";
+import { Tile } from "../model/tile";
 
 export function HomePage() {
 	const classes = useStyles();
 	const [boxColor, setBoxColor] = React.useState("red");
 	const todoList = useSelector((state: RootState) => state.todoList);
+
+	const tile: Tile = {
+		suit: "Characters",
+		rank: 2,
+	};
 
 	const onButtonClick = () =>
 		setBoxColor(boxColor === "red" ? "blue" : "red");
@@ -20,6 +27,7 @@ export function HomePage() {
 			</Typography>
 			<div className={classes.centerContainer}>
 				<HomeBox size={300} color={boxColor} />
+				<TileBox tile={tile} />
 				<Button
 					className={classes.button}
 					onClick={onButtonClick}
