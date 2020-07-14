@@ -6,6 +6,7 @@ import { HomeBox } from "../components";
 import { RootState } from "../reducers";
 import TileBox from "../components/Tile";
 import { Tile } from "../model/tile";
+import HandBox from "../components/Hand";
 
 export function HomePage() {
 	const classes = useStyles();
@@ -20,6 +21,8 @@ export function HomePage() {
 		red: false
 	};
 
+	const hand = { tiles: [tile, tile] };
+
 	const onButtonClick = () =>
 		setBoxColor(boxColor === "red" ? "blue" : "red");
 
@@ -30,24 +33,7 @@ export function HomePage() {
 			</Typography>
 			<div className={classes.centerContainer}>
 				<HomeBox size={300} color={boxColor} />
-				<Grid container>
-					<Grid item xs={3}>
-						<Grid container>
-							<Grid item xs={3}>
-								<TileBox tile={tile} />
-							</Grid>
-							<Grid item xs={3}>
-								<TileBox tile={tile} />
-							</Grid>
-							<Grid item xs={3}>
-								<TileBox tile={tile} />
-							</Grid>
-							<Grid item xs={3}>
-								<TileBox tile={tile} />
-							</Grid>
-						</Grid>
-					</Grid>
-				</Grid>
+				<HandBox hand={hand} />
 				<Button
 					className={classes.button}
 					onClick={onButtonClick}
