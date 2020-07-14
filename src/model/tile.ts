@@ -11,14 +11,14 @@ type TileType<S, R> = {
     rank: R;
 }
 
-export type Tile =
+export type TileVanilla =
     | TileType<"Characters", TileRank>
     | TileType<"Circles", TileRank>
     | TileType<"Bamboos", TileRank>
     | TileType<"Wind", TileWind>
     | TileType<"Dragon", TileDragon>
 
-export interface Tile2 {
-    tile: Tile,
+export interface Tile {
+    tile: TileVanilla,
     red: boolean,
 }

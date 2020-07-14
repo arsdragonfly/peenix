@@ -47,7 +47,7 @@ import t0m from "../tile_images/Man5-Dora.png"
 import t0p from "../tile_images/Pin5-Dora.png"
 import t0s from "../tile_images/Sou5-Dora.png"
 
-import { TileSuit, Tile } from "../model/tile"
+import { Tile, TileVanilla } from "../model/tile"
 
 const characterImages = [
     t1m,
@@ -97,13 +97,7 @@ const dragonImages = {
     Red: t7z,
 }
 
-const redFiveImages = [
-    t0m,
-    t0p,
-    t0s,
-]
-
-export function getTileImage(tile: Tile) {
+export function getTileVanillaImage(tile: TileVanilla) {
     switch (tile.suit) {
         case "Characters": return characterImages[tile.rank - 1]
         case "Circles": return circleImages[tile.rank - 1]
@@ -111,4 +105,19 @@ export function getTileImage(tile: Tile) {
         case "Wind": return windImages[tile.rank]
         case "Dragon": return dragonImages[tile.rank]
     }
+}
+
+export function getTileImage(tile: Tile) {
+    if (tile.red) {
+        if (tile.tile.suit === "Characters" && tile.tile.rank === 5) {
+            return t0m
+        }
+        if (tile.tile.suit === "Circles" && tile.tile.rank === 5) {
+            return t0p
+        }
+        if (tile.tile.suit === "Bamboos" && tile.tile.rank === 5) {
+            return t0s
+        }
+    }
+    return getTileVanillaImage(tile.tile)
 }

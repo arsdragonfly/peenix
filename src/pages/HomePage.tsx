@@ -1,4 +1,4 @@
-import { Button, Typography } from "@material-ui/core";
+import { Button, Typography, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
 import { useSelector } from "react-redux";
@@ -13,8 +13,11 @@ export function HomePage() {
 	const todoList = useSelector((state: RootState) => state.todoList);
 
 	const tile: Tile = {
-		suit: "Characters",
-		rank: 2,
+		tile: {
+			suit: "Characters",
+			rank: 2,
+		},
+		red: false
 	};
 
 	const onButtonClick = () =>
@@ -27,7 +30,24 @@ export function HomePage() {
 			</Typography>
 			<div className={classes.centerContainer}>
 				<HomeBox size={300} color={boxColor} />
-				<TileBox tile={tile} />
+				<Grid container>
+					<Grid item xs={3}>
+						<Grid container>
+							<Grid item xs={3}>
+								<TileBox tile={tile} />
+							</Grid>
+							<Grid item xs={3}>
+								<TileBox tile={tile} />
+							</Grid>
+							<Grid item xs={3}>
+								<TileBox tile={tile} />
+							</Grid>
+							<Grid item xs={3}>
+								<TileBox tile={tile} />
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
 				<Button
 					className={classes.button}
 					onClick={onButtonClick}

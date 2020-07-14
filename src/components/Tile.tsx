@@ -14,15 +14,17 @@ function TileBox(props: Props) {
     const classes = useStyles(props);
 
     return (
-        <div className={classes.root}>
-            <img src={getTileImage(tile)} alt=""/>
+        <div>
+            <img className={classes.root} src={getTileImage(tile)} alt="" />
         </div>
     );
 }
 
 const useStyles = makeStyles({
     root: {
+        verticalAlign: "middle",
         width: "100%",
+        height: "100%",
     }
 });
 
