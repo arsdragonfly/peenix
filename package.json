@@ -5,6 +5,7 @@
 		"@material-ui/core": "4.8.3",
 		"@material-ui/icons": "4.5.1",
 		"@material-ui/styles": "4.8.2",
+		"@types/ramda": "^0.27.32",
 		"localforage": "1.7.3",
 		"ramda": "^0.27.1",
 		"react": "16.12.0",

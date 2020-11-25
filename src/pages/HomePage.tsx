@@ -21,7 +21,7 @@ export function HomePage() {
 		red: false
 	};
 
-	const hand = { tiles: [tile, tile] };
+	const hand = { tiles: [tile, tile, tile, tile, tile, tile, tile, tile, tile, tile, tile, tile, tile] };
 
 	const onButtonClick = () =>
 		setBoxColor(boxColor === "red" ? "blue" : "red");
