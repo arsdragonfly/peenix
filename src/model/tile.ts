@@ -22,3 +22,24 @@ export interface Tile {
     tile: TileVanilla,
     red: boolean,
 }
+
+export function tileToText(t: Tile): string {
+    const tileNum = (rank: TileRank, red: boolean) => (red && rank == 5) ? 0 : rank;
+    switch (t.tile.suit) {
+        case "Characters": return `${tileNum(t.tile.rank, t.red)}m`;
+        case "Circles": return `${tileNum(t.tile.rank, t.red)}p`;
+        case "Bamboos": return `${tileNum(t.tile.rank, t.red)}s`;
+        case "Wind": switch (t.tile.rank) {
+            case "East": return "1z";
+            case "South": return "2z";
+            case "West": return "3z";
+            case "North": return "4z";
+        }
+        case "Dragon": switch (t.tile.rank) {
+            case "White": return "5z";
+            case "Green": return "6z";
+            case "Red": return "7z";
+        }
+    }
+}
+
