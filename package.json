@@ -17,8 +17,7 @@
 		"redux-logger": "3.0.6",
 		"redux-persist": "6.0.0",
 		"redux-thunk": "2.3.0",
-		"typescript": "3.7.4",
-		"riichi-tools-rs-wasm": "file:../riichi-tools-rs-wasm/pkg"
+		"typescript": "3.7.4"
 	},
 	"scripts": {
 		"start": "react-app-rewired start",

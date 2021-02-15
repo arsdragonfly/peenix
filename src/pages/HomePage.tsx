@@ -7,7 +7,7 @@ import { RootState } from "../reducers";
 import TileBox from "../components/Tile";
 import { Tile } from "../model/tile";
 import HandBox from "../components/Hand";
-import * as wasm from "riichi-tools-rs-wasm"
+// import * as wasm from "riichi-tools-rs-wasm"
 
 export function HomePage() {
 	const classes = useStyles();
@@ -27,7 +27,7 @@ export function HomePage() {
 	const onButtonClick = () =>
 		setBoxColor(boxColor === "red" ? "blue" : "red");
 
-	const onWasmClick = () => wasm.greet();
+	// const onWasmClick = () => wasm.greet();
 
 	return (
 		<div className={classes.root}>
@@ -44,14 +44,6 @@ export function HomePage() {
 					color="primary"
 				>
 					Change Color
-				</Button>
-				<Button
-					className={classes.button}
-					onClick={onWasmClick}
-					variant="outlined"
-					color="primary"
-				>
-					WASM greet
 				</Button>
 			</div>
 		</div>
