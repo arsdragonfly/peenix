@@ -1,3 +1,5 @@
+import * as R from 'ramda';
+
 export type TileSuit = "Characters" | "Circles" | "Bamboos" | "Wind" | "Dragon"
 
 export type TileRank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
@@ -55,6 +57,7 @@ export function tileToReprChar(t: Tile): string {
 }
 
 export function parseTile(s: string): Tile | undefined {
+    // parse a single tile, e.g. "1s"
     if (s[1] == "z") {
         const tileVanillaMap: { [key: string]: TileVanilla } = {
             "1": { suit: "Wind", rank: "East" },
@@ -104,4 +107,20 @@ export function parseTile(s: string): Tile | undefined {
         }
     }
     return undefined;
+}
+
+export function parseTiles(s: string): Tile[] {
+    let tiles: Tile[] = [];
+    let ranks: string[] = [];
+    const parseRanks = (c: string) => R.map(r => parseTile(`${r}${c}`), ranks).flatMap(f => typeof f !== "undefined" ? [f] : [])
+    for (const c of s) {
+        if (["m", "p", "s", "z"].includes(c)) {
+            tiles = tiles.concat(parseRanks(c))
+            ranks = []
+        } else {
+            ranks.push(c)
+        }
+
+    }
+    return tiles;
 }
