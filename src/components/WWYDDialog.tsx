@@ -11,7 +11,7 @@ interface Props {
 	onClose: () => void;
 }
 
-export function TodoDialog(props: Props) {
+export function WWYDDialog(props: Props) {
 	const { open, onClose } = props;
 	const classes = useStyles();
 	const [newHandText, setNewHandText] = React.useState("");
@@ -21,7 +21,7 @@ export function TodoDialog(props: Props) {
 	const handleClose = () => {
 		WWYDActions_.addWWYD({
 			id: Math.random(),
-			hand: parseTiles(newHandText),
+			hand: {tiles: parseTiles(newHandText)},
 			discard: parseTile(newDiscardText) ?? {tile: {suit: "Characters", rank: 3}, red: false}
 		});
 		onClose();
@@ -48,7 +48,8 @@ export function TodoDialog(props: Props) {
 				value={newHandText}
 				onChange={handleHandTextChange}
 				className={classes.textField}
-				label="23367m067p112233s"
+				label="Hand"
+				placeholder="e.g. 23367m067p112233s"
 			/>
 			<TextField
 				id="multiline-flexible"
@@ -56,7 +57,8 @@ export function TodoDialog(props: Props) {
 				value={newDiscardText}
 				onChange={handleDiscardTextChange}
 				className={classes.textField}
-				label="3m"
+				label="Discard"
+				placeholder="e.g. 3m"
 			/>
 			<DialogActions>
 				<Button color="primary" onClick={handleClose}>

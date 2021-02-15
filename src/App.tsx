@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { Route, Router } from "react-router-dom";
 import { history } from "./configureStore";
 import { Todo } from "./model";
-import { HomePage, TodoPage } from "./pages";
+import { WWYDPage, TodoPage } from "./pages";
 import { RootState } from "./reducers/index";
 import { withRoot } from "./withRoot";
 
@@ -19,8 +19,8 @@ function Routes() {
 
 	return (
 		<div className={classes.content}>
-			<Route exact={true} path="/" component={HomePage} />
-			<Route exact={true} path="/home" component={HomePage} />
+			<Route exact={true} path="/" component={WWYDPage} />
+			<Route exact={true} path="/home" component={WWYDPage} />
 			<Route exact={true} path="/todo" component={TodoPage} />
 		</div>
 	);
