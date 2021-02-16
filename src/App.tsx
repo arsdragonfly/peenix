@@ -1,17 +1,13 @@
 // prettier-ignore
-import { AppBar, Badge, Divider, Drawer as DrawerMui, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
+import { AppBar, Divider, Drawer as DrawerMui, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
 import { Theme } from "@material-ui/core/styles";
-import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
-import { useSelector } from "react-redux";
 import { Route, Router } from "react-router-dom";
 import { history } from "./configureStore";
-import { Todo } from "./model";
-import { WWYDPage, TodoPage } from "./pages";
-import { RootState } from "./reducers/index";
+import { WWYDPage } from "./pages";
 import { withRoot } from "./withRoot";
 
 function Routes() {
@@ -21,12 +17,11 @@ function Routes() {
 		<div className={classes.content}>
 			<Route exact={true} path="/" component={WWYDPage} />
 			<Route exact={true} path="/home" component={WWYDPage} />
-			<Route exact={true} path="/todo" component={TodoPage} />
 		</div>
 	);
 }
 
-function Drawer(props: { todoList: Todo[] }) {
+function Drawer() {
 	const classes = useStyles();
 
 	return (
@@ -42,14 +37,6 @@ function Drawer(props: { todoList: Todo[] }) {
 				</ListItem>
 			</List>
 			<Divider />
-			<List>
-				<ListItem button onClick={() => history.push("/todo")}>
-					<ListItemIcon>
-						<TodoIcon todoList={props.todoList} />
-					</ListItemIcon>
-					<ListItemText primary="Todo" />
-				</ListItem>
-			</List>
 		</div>
 	);
 }
@@ -57,7 +44,6 @@ function Drawer(props: { todoList: Todo[] }) {
 function App() {
 	const classes = useStyles();
 	const [mobileOpen, setMobileOpen] = React.useState(true);
-	const todoList = useSelector((state: RootState) => state.todoList);
 	const isMobile = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("sm")
 	);
@@ -85,8 +71,7 @@ function App() {
 								color="inherit"
 								noWrap={isMobile}
 							>
-								Create-React-App with Material-UI, Typescript,
-								Redux and Routing
+								Peenix
 							</Typography>
 						</Toolbar>
 					</AppBar>
@@ -103,7 +88,6 @@ function App() {
 								keepMounted: true, // Better open performance on mobile.
 							}}
 						>
-							<Drawer todoList={todoList} />
 						</DrawerMui>
 					</Hidden>
 					<Hidden smDown>
@@ -114,7 +98,7 @@ function App() {
 								paper: classes.drawerPaper,
 							}}
 						>
-							<Drawer todoList={todoList} />
+							<Drawer />
 						</DrawerMui>
 					</Hidden>
 					<Routes />
@@ -122,20 +106,6 @@ function App() {
 			</div>
 		</Router>
 	);
-}
-
-function TodoIcon(props: { todoList: Todo[] }) {
-	let uncompletedTodos = props.todoList.filter(t => t.completed === false);
-
-	if (uncompletedTodos.length > 0) {
-		return (
-			<Badge color="secondary" badgeContent={uncompletedTodos.length}>
-				<FormatListNumberedIcon />
-			</Badge>
-		);
-	} else {
-		return <FormatListNumberedIcon />;
-	}
 }
 
 const drawerWidth = 240;

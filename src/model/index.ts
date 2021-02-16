@@ -1,8 +1,7 @@
-import { TodoAction } from './todo';
+import { WWYDAction } from './WWYD';
 
-export * from './todo';
 export * from './WWYD'
 
 export type Action =
-    | TodoAction
-;
+    | WWYDAction
+    ;

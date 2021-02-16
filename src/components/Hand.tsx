@@ -1,5 +1,5 @@
 // prettier-ignore
-import { makeStyles, Grid, Box, Container } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import * as React from 'react';
 import { Hand } from '../model/hand';
 import TileBox from './Tile';
@@ -12,7 +12,6 @@ interface Props {
 function HandBox(props: Props) {
 
     const { hand } = props;
-    const classes = useStyles(props);
 
     // Grid only allows 12 columns by default, we need more subdivisions
     return (
@@ -32,13 +31,5 @@ function HandBox(props: Props) {
         </Grid>
     )
 }
-
-const useStyles = makeStyles({
-    container: {
-        height: "100%",
-        maxWidth: "unset",
-        width: "auto",
-    },
-});
 
 export default HandBox;

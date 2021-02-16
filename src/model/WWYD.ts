@@ -10,8 +10,6 @@ export interface WWYD {
 export enum WWYDActions {
   ADD_WWYD = "ADD_WWYD",
   DELETE_WWYD = "DELETE_WWYD",
-  // COMPLETE_TODO = "COMPLETE_TODO",
-  // UNCOMPLETE_TODO = "UNCOMPLETE_TODO",
 }
 
 interface WWYDActionType<T, P> {
