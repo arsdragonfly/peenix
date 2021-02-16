@@ -37,9 +37,7 @@ export function WWYDTable() {
 									<HandBox hand={n.hand} />
 								</TableCell>
 								<TableCell padding="default">
-									<Container>
-										<TileBox tile={n.discard} />
-									</Container>
+									<TileBox tile={n.discard} />
 								</TableCell>
 								<TableCell padding="default">
 									<IconButton

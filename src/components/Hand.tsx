@@ -16,8 +16,8 @@ function HandBox(props: Props) {
 
     // Grid only allows 12 columns by default, we need more subdivisions
     return (
-        <Grid container justify="space-around">
-            {R.splitEvery(4, hand.tiles).map((quads) =>
+        <Container className={classes.container}>
+            <Grid container justify="space-around"> {R.splitEvery(4, hand.tiles).map((quads) =>
             (
                 <Grid item xs={3}>
                     <Grid container>
@@ -30,11 +30,17 @@ function HandBox(props: Props) {
                 </Grid>
             )
             )}
-        </Grid>
+            </Grid>
+        </Container>
     )
 }
 
 const useStyles = makeStyles({
+    container: {
+        height: "100%",
+        maxWidth: "unset",
+        width: "auto",
+    },
 });
 
 export default HandBox;
