@@ -27,7 +27,7 @@ export interface Tile {
 
 export function tileToReprNum(t: Tile): string {
     // find the tile's corresponding number a-la tenhou pairi.
-    const tileNum = (rank: TileRank, red: boolean) => (red && rank == 5) ? 0 : rank;
+    const tileNum = (rank: TileRank, red: boolean) => (red && rank === 5) ? 0 : rank;
     switch (t.tile.suit) {
         case "Wind": switch (t.tile.rank) {
             case "East": return "1";
@@ -58,7 +58,7 @@ export function tileToReprChar(t: Tile): string {
 
 export function parseTile(s: string): Tile | undefined {
     // parse a single tile, e.g. "1s"
-    if (s[1] == "z") {
+    if (s[1] === "z") {
         const tileVanillaMap: { [key: string]: TileVanilla } = {
             "1": { suit: "Wind", rank: "East" },
             "2": { suit: "Wind", rank: "South" },
@@ -80,7 +80,7 @@ export function parseTile(s: string): Tile | undefined {
         }
         const suit: "Characters" | "Circles" | "Bamboos" | undefined = suitMap[s[1]]
         if (suit) {
-            if (s[0] == "0") {
+            if (s[0] === "0") {
                 return { tile: { suit, rank: 5 }, red: true }
             }
             else {

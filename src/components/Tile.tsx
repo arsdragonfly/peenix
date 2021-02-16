@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Box } from '@material-ui/core';
 import * as React from 'react';
 import { getTileImage } from '../scripts/tileImage';
 import { Tile } from '../model/tile';
@@ -14,16 +14,16 @@ function TileBox(props: Props) {
     const classes = useStyles(props);
 
     return (
-        <div>
-            <img className={classes.root} src={getTileImage(tile)} alt="" />
-        </div>
+        <Box height="100%">
+            <img className={classes.img} src={getTileImage(tile)} alt="" />
+        </Box>
     );
 }
 
 const useStyles = makeStyles({
-    root: {
+    img: {
         verticalAlign: "middle",
-        width: "100%",
+        maxWidth: "100%",
         height: "100%",
     }
 });

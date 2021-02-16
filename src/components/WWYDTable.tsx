@@ -1,5 +1,5 @@
 // prettier-ignore
-import { Checkbox, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
+import { Checkbox, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, Grid, Box, Container } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
@@ -33,13 +33,15 @@ export function WWYDTable() {
 								key={n.id}
 								hover
 							>
-								<TableCell padding="none">
+								<TableCell padding="default">
 									<HandBox hand={n.hand} />
 								</TableCell>
-								<TableCell padding="none">
-									<TileBox tile={n.discard} />
+								<TableCell padding="default">
+									<Container>
+										<TileBox tile={n.discard} />
+									</Container>
 								</TableCell>
-								<TableCell padding="none">
+								<TableCell padding="default">
 									<IconButton
 										aria-label="Delete"
 										color="default"
