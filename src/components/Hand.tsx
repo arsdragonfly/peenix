@@ -16,22 +16,20 @@ function HandBox(props: Props) {
 
     // Grid only allows 12 columns by default, we need more subdivisions
     return (
-        <Container className={classes.container}>
-            <Grid container justify="space-around"> {R.splitEvery(4, hand.tiles).map((quads) =>
-            (
-                <Grid item xs={3}>
-                    <Grid container>
-                        {quads.map((t) => (
-                            <Grid item xs={3}>
-                                <TileBox tile={t} />
-                            </Grid>
-                        ))}
-                    </Grid>
+        <Grid container justify="space-around"> {R.splitEvery(4, hand.tiles).map((quads) =>
+        (
+            <Grid item xs={12} sm={3}>
+                <Grid container>
+                    {quads.map((t) => (
+                        <Grid item xs={3}>
+                            <TileBox tile={t} />
+                        </Grid>
+                    ))}
                 </Grid>
-            )
-            )}
             </Grid>
-        </Container>
+        )
+        )}
+        </Grid>
     )
 }
 
