@@ -5,6 +5,7 @@ import * as React from "react";
 import { useActions } from "../actions";
 import * as WWYDActions from "../actions/WWYD";
 import { parseTiles, parseTile } from "../model/tile"
+import { v4 as uuidv4 } from "uuid"
 
 interface Props {
 	open: boolean;
@@ -20,7 +21,7 @@ export function WWYDDialog(props: Props) {
 
 	const handleClose = () => {
 		WWYDActions_.addWWYD({
-			id: Math.random(),
+			id: uuidv4(),
 			hand: {tiles: parseTiles(newHandText)},
 			discard: parseTile(newDiscardText) ?? {tile: {suit: "Characters", rank: 3}, red: false}
 		});
