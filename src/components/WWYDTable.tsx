@@ -11,6 +11,7 @@ import { RootState } from "../reducers";
 import TileBox from "./Tile"
 import HandBox from "./Hand"
 import * as Tile from "./Tile"
+import WWYDComponent from "./WWYD"
 
 function DiscardTileBox(props: Tile.Props) {
 	const { tile } = props;
@@ -44,28 +45,7 @@ export function WWYDTable() {
 				<TableBody>
 					{WWYDList.map((n: WWYD) => {
 						return (
-							<TableRow
-								key={n.id}
-								hover
-							>
-								<TableCell padding="default">
-									<HandBox hand={n.hand} />
-								</TableCell>
-								<TableCell padding="default">
-									<DiscardTileBox tile={n.discard} />
-								</TableCell>
-								<TableCell padding="default">
-									<IconButton
-										aria-label="Delete"
-										color="default"
-										onClick={() =>
-											WWYDActions_.deleteWWYD(n.id)
-										}
-									>
-										<DeleteIcon />
-									</IconButton>
-								</TableCell>
-							</TableRow>
+							<WWYDComponent wwyd={n} />
 						);
 					})}
 				</TableBody>
