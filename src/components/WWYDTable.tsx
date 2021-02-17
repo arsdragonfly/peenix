@@ -11,7 +11,7 @@ import { RootState } from "../reducers";
 import TileBox from "./Tile"
 import HandBox from "./Hand"
 import * as Tile from "./Tile"
-import WWYDComponent from "./WWYD"
+import WWYDComponent from "./WWYDComponent"
 
 export function WWYDTable() {
 	const classes = useStyles();

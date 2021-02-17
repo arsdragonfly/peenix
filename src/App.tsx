@@ -43,7 +43,7 @@ function Drawer() {
 
 function App() {
 	const classes = useStyles();
-	const [mobileOpen, setMobileOpen] = React.useState(true);
+	const [mobileOpen, setMobileOpen] = React.useState(false);
 	const isMobile = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("sm")
 	);
@@ -75,32 +75,20 @@ function App() {
 							</Typography>
 						</Toolbar>
 					</AppBar>
-					<Hidden mdUp>
-						<DrawerMui
-							variant="temporary"
-							anchor={"left"}
-							open={mobileOpen}
-							classes={{
-								paper: classes.drawerPaper,
-							}}
-							onClose={handleDrawerToggle}
-							ModalProps={{
-								keepMounted: true, // Better open performance on mobile.
-							}}
-						>
-						</DrawerMui>
-					</Hidden>
-					<Hidden smDown>
-						<DrawerMui
-							variant="permanent"
-							open
-							classes={{
-								paper: classes.drawerPaper,
-							}}
-						>
-							<Drawer />
-						</DrawerMui>
-					</Hidden>
+					<DrawerMui
+						variant="temporary"
+						anchor={"left"}
+						open={mobileOpen}
+						classes={{
+							paper: classes.drawerPaper,
+						}}
+						onClose={handleDrawerToggle}
+						ModalProps={{
+							keepMounted: true, // Better open performance on mobile.
+						}}
+					>
+						<Drawer />
+					</DrawerMui>
 					<Routes />
 				</div>
 			</div>
