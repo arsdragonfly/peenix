@@ -13,20 +13,6 @@ import HandBox from "./Hand"
 import * as Tile from "./Tile"
 import WWYDComponent from "./WWYD"
 
-function DiscardTileBox(props: Tile.Props) {
-	const { tile } = props;
-	const [ displayTile, setDisplayTile ] = React.useState<typeof tile>(undefined);
-
-	const toggleDisplayTile = () => displayTile === undefined ? setDisplayTile(tile) : setDisplayTile(undefined)
-
-	return (
-		<Box onClick={toggleDisplayTile}>
-			<TileBox tile={displayTile} />
-		</Box>
-	)
-
-}
-
 export function WWYDTable() {
 	const classes = useStyles();
 	const WWYDList = useSelector((state: RootState) => state.WWYDList);

@@ -1,4 +1,4 @@
-import { IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
+import { IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, Box } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
@@ -8,11 +8,27 @@ import * as WWYDActions from "../actions/WWYD";
 import { WWYD } from "../model";
 import { RootState } from "../reducers";
 import TileBox from "./Tile"
+import * as Tile from "./Tile"
 import HandBox from "./Hand"
 
 interface Props {
     wwyd: WWYD,
 }
+
+function DiscardTileBox(props: Tile.Props) {
+	const { tile } = props;
+	const [ displayTile, setDisplayTile ] = React.useState<typeof tile>(undefined);
+
+	const toggleDisplayTile = () => displayTile === undefined ? setDisplayTile(tile) : setDisplayTile(undefined)
+
+	return (
+		<Box onClick={toggleDisplayTile}>
+			<TileBox tile={displayTile} />
+		</Box>
+	)
+
+}
+
 
 function WWYDComponent(props: Props) {
     const { wwyd } = props;
@@ -27,7 +43,7 @@ function WWYDComponent(props: Props) {
                 <HandBox hand={wwyd.hand} />
             </TableCell>
             <TableCell padding="default">
-                <TileBox tile={wwyd.discard} />
+                <DiscardTileBox tile={wwyd.discard} />
             </TableCell>
             <TableCell padding="default">
                 <IconButton
