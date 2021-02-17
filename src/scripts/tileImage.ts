@@ -47,6 +47,8 @@ import t0m from "../tile_images/Man5-Dora.png"
 import t0p from "../tile_images/Pin5-Dora.png"
 import t0s from "../tile_images/Sou5-Dora.png"
 
+import blank from "../tile_images/Blank.png"
+
 import { Tile, TileVanilla } from "../model/tile"
 
 const characterImages = [
@@ -107,7 +109,10 @@ export function getTileVanillaImage(tile: TileVanilla) {
     }
 }
 
-export function getTileImage(tile: Tile) {
+export function getTileImage(tile: Tile | undefined ) {
+    if (tile === undefined) {
+        return blank
+    }
     if (tile.red) {
         if (tile.tile.suit === "Characters" && tile.tile.rank === 5) {
             return t0m

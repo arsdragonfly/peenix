@@ -1,5 +1,5 @@
 // prettier-ignore
-import { IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
+import { Box, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
@@ -10,6 +10,21 @@ import { WWYD } from "../model";
 import { RootState } from "../reducers";
 import TileBox from "./Tile"
 import HandBox from "./Hand"
+import * as Tile from "./Tile"
+
+function DiscardTileBox(props: Tile.Props) {
+	const { tile } = props;
+	const [ displayTile, setDisplayTile ] = React.useState<typeof tile>(undefined);
+
+	const toggleDisplayTile = () => displayTile === undefined ? setDisplayTile(tile) : setDisplayTile(undefined)
+
+	return (
+		<Box onClick={toggleDisplayTile}>
+			<TileBox tile={displayTile} />
+		</Box>
+	)
+
+}
 
 export function WWYDTable() {
 	const classes = useStyles();
@@ -37,7 +52,7 @@ export function WWYDTable() {
 									<HandBox hand={n.hand} />
 								</TableCell>
 								<TableCell padding="default">
-									<TileBox tile={n.discard} />
+									<DiscardTileBox tile={n.discard} />
 								</TableCell>
 								<TableCell padding="default">
 									<IconButton

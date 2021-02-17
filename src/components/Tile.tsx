@@ -3,8 +3,8 @@ import * as React from 'react';
 import { getTileImage } from '../scripts/tileImage';
 import { Tile } from '../model/tile';
 
-interface Props {
-    tile: Tile
+export interface Props {
+    tile: Tile | undefined
 }
 
 function TileBox(props: Props) {
