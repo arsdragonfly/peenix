@@ -1,6 +1,7 @@
 // prettier-ignore
-import { Box, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
+import { Box, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, useMediaQuery } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
 import { useSelector } from "react-redux";
@@ -17,6 +18,9 @@ export function WWYDTable() {
 	const classes = useStyles();
 	const WWYDList = useSelector((state: RootState) => state.WWYDList);
 	const WWYDActions_ = useActions(WWYDActions);
+	const isMobile = useMediaQuery((theme: Theme) =>
+		theme.breakpoints.down("sm")
+	);
 
 	return (
 		<Paper className={classes.paper}>
@@ -25,7 +29,9 @@ export function WWYDTable() {
 					<TableRow>
 						<TableCell padding="default">Hand</TableCell>
 						<TableCell padding="default">Discard</TableCell>
-						<TableCell padding="default">Delete</TableCell>
+						{ !isMobile && (
+							<TableCell padding="default">Delete</TableCell>
+						) }
 					</TableRow>
 				</TableHead>
 				<TableBody>

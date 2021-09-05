@@ -17,7 +17,7 @@ function HandBox(props: Props) {
     return (
         <Grid container justify="space-around"> {R.splitEvery(4, hand.tiles).map((quads) =>
         (
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} md={3}>
                 <Grid container>
                     {quads.map((t) => (
                         <Grid item xs={3}>

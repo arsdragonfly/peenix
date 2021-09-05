@@ -1,6 +1,6 @@
-import { IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, Box } from "@material-ui/core";
+import { IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, Box, Container, useMediaQuery } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { makeStyles } from "@material-ui/styles";
+import { Theme } from "@material-ui/core/styles";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../actions";
@@ -33,6 +33,9 @@ function DiscardTileBox(props: Tile.Props) {
 function WWYDComponent(props: Props) {
     const { wwyd } = props;
 	const WWYDActions_ = useActions(WWYDActions);
+	const isMobile = useMediaQuery((theme: Theme) =>
+		theme.breakpoints.down("sm")
+	);
 
     return (
         <TableRow
@@ -43,19 +46,27 @@ function WWYDComponent(props: Props) {
                 <HandBox hand={wwyd.hand} />
             </TableCell>
             <TableCell padding="default">
-                <DiscardTileBox tile={wwyd.discard} />
+                { isMobile ? (
+                    <DiscardTileBox tile={wwyd.discard} />
+                ) : (
+                    <Container>
+                        <DiscardTileBox tile={wwyd.discard} />
+                    </Container>
+                ) }
             </TableCell>
-            <TableCell padding="default">
-                <IconButton
-                    aria-label="Delete"
-                    color="default"
-                    onClick={() =>
-                        WWYDActions_.deleteWWYD(wwyd.id)
-                    }
-                >
-                    <DeleteIcon />
-                </IconButton>
-            </TableCell>
+            { !isMobile && (
+                <TableCell padding="default">
+                    <IconButton
+                        aria-label="Delete"
+                        color="default"
+                        onClick={() =>
+                            WWYDActions_.deleteWWYD(wwyd.id)
+                        }
+                    >
+                        <DeleteIcon />
+                    </IconButton>
+                </TableCell>
+            ) }
         </TableRow>
     );
 }
