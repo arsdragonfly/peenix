@@ -1,6 +1,5 @@
 // prettier-ignore
 import { Grid } from '@material-ui/core';
-import * as React from 'react';
 import { Hand } from '../model/hand';
 import TileBox from './Tile';
 import * as R from 'ramda';

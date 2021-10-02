@@ -2,8 +2,8 @@
 import { Button, Dialog, DialogActions, DialogTitle, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
-import { useActions } from "../actions";
-import * as WWYDActions from "../actions/WWYD";
+import { addWWYD } from "../features/WWYDList/WWYDListSlice";
+import { useAppDispatch } from "../hooks"
 import { parseTiles, parseTile } from "../model/tile"
 import { v4 as uuidv4 } from "uuid"
 
@@ -15,16 +15,16 @@ interface Props {
 export function WWYDDialog(props: Props) {
 	const { open, onClose } = props;
 	const classes = useStyles();
+	const dispatch = useAppDispatch();
 	const [newHandText, setNewHandText] = React.useState("");
 	const [newDiscardText, setNewDiscardText] = React.useState("");
-	const WWYDActions_ = useActions(WWYDActions);
 
 	const handleClose = () => {
-		WWYDActions_.addWWYD({
+		dispatch(addWWYD({
 			id: uuidv4(),
-			hand: {tiles: parseTiles(newHandText)},
-			discard: parseTile(newDiscardText) ?? {tile: {suit: "Characters", rank: 3}, red: false}
-		});
+			hand: { tiles: parseTiles(newHandText) },
+			discard: parseTile(newDiscardText) ?? { tile: { suit: "Characters", rank: 3 }, red: false }
+		}));
 		onClose();
 
 		// reset texts if user reopens the dialog

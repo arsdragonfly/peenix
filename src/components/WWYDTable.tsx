@@ -1,23 +1,15 @@
 // prettier-ignore
-import { Box, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, useMediaQuery } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Paper, Table, TableBody, TableCell, TableHead, TableRow, useMediaQuery } from "@material-ui/core";
 import { Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/styles";
-import * as React from "react";
-import { useSelector } from "react-redux";
-import { useActions } from "../actions";
-import * as WWYDActions from "../actions/WWYD";
 import { WWYD } from "../model";
-import { RootState } from "../reducers";
-import TileBox from "./Tile"
-import HandBox from "./Hand"
-import * as Tile from "./Tile"
+import { useAppSelector } from "../hooks";
+import { selectWWYDList } from "../features/WWYDList/WWYDListSlice";
 import WWYDComponent from "./WWYDComponent"
 
 export function WWYDTable() {
 	const classes = useStyles();
-	const WWYDList = useSelector((state: RootState) => state.WWYDList);
-	const WWYDActions_ = useActions(WWYDActions);
+	const WWYDList = useAppSelector(selectWWYDList);
 	const isMobile = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("sm")
 	);
@@ -29,9 +21,9 @@ export function WWYDTable() {
 					<TableRow>
 						<TableCell padding="default">Hand</TableCell>
 						<TableCell padding="default">Discard</TableCell>
-						{ !isMobile && (
+						{!isMobile && (
 							<TableCell padding="default">Delete</TableCell>
-						) }
+						)}
 					</TableRow>
 				</TableHead>
 				<TableBody>

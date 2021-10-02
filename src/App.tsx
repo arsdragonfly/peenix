@@ -1,12 +1,12 @@
 // prettier-ignore
-import { AppBar, Divider, Drawer as DrawerMui, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
+import { AppBar, Divider, Drawer as DrawerMui, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
 import { Theme } from "@material-ui/core/styles";
 import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
 import { Route, Router } from "react-router-dom";
-import { history } from "./configureStore";
+import { history } from "./store";
 import { WWYDPage } from "./pages";
 import { withRoot } from "./withRoot";
 

@@ -1,5 +1,4 @@
 import { makeStyles, Box } from '@material-ui/core';
-import * as React from 'react';
 import { getTileImage } from '../scripts/tileImage';
 import { Tile } from '../model/tile';
 
