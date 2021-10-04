@@ -1,6 +1,6 @@
-import { Button, Grid, Typography } from "@material-ui/core";
-import { Theme } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/styles";
+import { Button, Grid, Typography } from "@mui/material";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import * as React from "react";
 import { WWYDDialog, WWYDTable } from "../components";
 
@@ -46,7 +46,7 @@ export const WWYDPage: React.FC = () => {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     padding: 20,
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down('lg')]: {
       paddingTop: 50,
       paddingLeft: 15,
       paddingRight: 15

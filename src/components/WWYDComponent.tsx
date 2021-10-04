@@ -5,9 +5,9 @@ import {
   Box,
   Container,
   useMediaQuery
-} from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { Theme } from "@material-ui/core/styles";
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Theme } from "@mui/material/styles";
 import * as React from "react";
 import { WWYD } from "../model";
 import TileBox from "./Tile";
@@ -43,15 +43,15 @@ const WWYDComponent: React.FC<Props> = (props: Props) => {
   const { wwyd } = props;
   const dispatch = useAppDispatch();
   const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("sm")
+    theme.breakpoints.down('md')
   );
 
   return (
     <TableRow key={wwyd.id} hover>
-      <TableCell padding="default">
+      <TableCell padding="normal">
         <HandBox hand={wwyd.hand} />
       </TableCell>
-      <TableCell padding="default">
+      <TableCell padding="normal">
         {isMobile ? (
           <DiscardTileBox tile={wwyd.discard} />
         ) : (
@@ -61,12 +61,12 @@ const WWYDComponent: React.FC<Props> = (props: Props) => {
         )}
       </TableCell>
       {!isMobile && (
-        <TableCell padding="default">
+        <TableCell padding="normal">
           <IconButton
             aria-label="Delete"
             color="default"
             onClick={() => dispatch(deleteWWYD(wwyd.id))}
-          >
+            size="large">
             <DeleteIcon />
           </IconButton>
         </TableCell>

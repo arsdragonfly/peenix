@@ -1,6 +1,6 @@
 // prettier-ignore
-import { Button, Dialog, DialogActions, DialogTitle, TextField } from '@material-ui/core'
-import { makeStyles } from "@material-ui/styles";
+import { Button, Dialog, DialogActions, DialogTitle, TextField } from '@mui/material'
+import { makeStyles } from "@mui/styles";
 import * as React from "react";
 import { addWWYD } from "../features/WWYDList/WWYDListSlice";
 import { useAppDispatch } from "../hooks";

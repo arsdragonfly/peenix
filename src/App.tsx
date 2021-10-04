@@ -1,7 +1,8 @@
-import { AppBar, Divider, Drawer as DrawerMui, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography, useMediaQuery } from '@material-ui/core'
-import { Theme, makeStyles } from "@material-ui/core/styles";
-import HomeIcon from "@material-ui/icons/Home";
-import MenuIcon from "@material-ui/icons/Menu";
+import { AppBar, Divider, Drawer as DrawerMui, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography, useMediaQuery } from '@mui/material'
+import { Theme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import HomeIcon from "@mui/icons-material/Home";
+import MenuIcon from "@mui/icons-material/Menu";
 import * as React from "react";
 import { Route, Router } from "react-router-dom";
 import { history } from "./store";
@@ -89,7 +90,7 @@ const App: React.FC = () => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("sm")
+    theme.breakpoints.down('md')
   );
 
   const handleDrawerToggle = (): void => {
@@ -107,7 +108,7 @@ const App: React.FC = () => {
                 aria-label="open drawer"
                 onClick={handleDrawerToggle}
                 className={classes.navIconHide}
-              >
+                size="large">
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" color="inherit" noWrap={isMobile}>

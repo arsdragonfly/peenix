@@ -1,7 +1,7 @@
 // prettier-ignore
-import { Paper, Table, TableBody, TableCell, TableHead, TableRow, useMediaQuery } from '@material-ui/core'
-import { Theme } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/styles";
+import { Paper, Table, TableBody, TableCell, TableHead, TableRow, useMediaQuery } from '@mui/material'
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import { WWYD } from "../model";
 import { useAppSelector } from "../hooks";
 import { selectWWYDList } from "../features/WWYDList/WWYDListSlice";
@@ -11,7 +11,7 @@ export const WWYDTable: React.FC = () => {
   const classes = useStyles();
   const WWYDList = useAppSelector(selectWWYDList);
   const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("sm")
+    theme.breakpoints.down('md')
   );
 
   return (
@@ -19,9 +19,9 @@ export const WWYDTable: React.FC = () => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell padding="default">Hand</TableCell>
-            <TableCell padding="default">Discard</TableCell>
-            {!isMobile && <TableCell padding="default">Delete</TableCell>}
+            <TableCell padding="normal">Hand</TableCell>
+            <TableCell padding="normal">Discard</TableCell>
+            {!isMobile && <TableCell padding="normal">Delete</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>

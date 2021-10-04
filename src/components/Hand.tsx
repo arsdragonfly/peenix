@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import { Hand } from "../model/hand";
 import TileBox from "./Tile";
 import * as R from "ramda";
@@ -12,7 +12,7 @@ const HandBox: React.FC<Props> = (props: Props) => {
 
   // Grid only allows 12 columns by default, we need more subdivisions
   return (
-    <Grid container justify="space-around">
+    <Grid container justifyContent="space-around">
       {R.splitEvery(4, hand.tiles).map((quads, idx) => (
         <Grid item xs={12} md={3} key={idx}>
           <Grid container>
