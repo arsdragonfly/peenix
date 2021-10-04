@@ -19,7 +19,12 @@ export const WWYDDialog: React.FC<Props> = (props: Props) => {
   const [newHandText, setNewHandText] = React.useState("");
   const [newDiscardText, setNewDiscardText] = React.useState("");
 
-  const handleClose = (): void => {
+  const resetText = (): void => {
+    setNewHandText("");
+    setNewDiscardText("");
+  };
+
+  const addWWYDEntry = (): void => {
     dispatch(
       addWWYD({
         id: uuidv4(),
@@ -30,12 +35,7 @@ export const WWYDDialog: React.FC<Props> = (props: Props) => {
         }
       })
     );
-    onClose();
-
-    // reset texts if user reopens the dialog
-    setNewHandText("");
-    setNewDiscardText("");
-  };
+  }
 
   const handleHandTextChange = (event: any): void => {
     setNewHandText(event.target.value);
@@ -46,7 +46,10 @@ export const WWYDDialog: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open} onClose={() => {
+      resetText();
+      onClose();
+    }}>
       <DialogTitle>Add a new WWYD</DialogTitle>
       <TextField
         id="multiline-flexible"
@@ -67,7 +70,17 @@ export const WWYDDialog: React.FC<Props> = (props: Props) => {
         placeholder="e.g. 3m"
       />
       <DialogActions>
-        <Button color="primary" onClick={handleClose}>
+        <Button color="primary" onClick={() => {
+          resetText();
+          onClose();
+        }}>
+          Cancel
+        </Button>
+        <Button color="primary" onClick={() => {
+          addWWYDEntry();
+          resetText();
+          onClose();
+        }}>
           OK
         </Button>
       </DialogActions>
