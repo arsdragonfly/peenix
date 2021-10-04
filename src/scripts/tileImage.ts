@@ -58,46 +58,46 @@ const circleImages = [t1p, t2p, t3p, t4p, t5p, t6p, t7p, t8p, t9p];
 const bambooImages = [t1s, t2s, t3s, t4s, t5s, t6s, t7s, t8s, t9s];
 
 const windImages = {
-	East: t1z,
-	South: t2z,
-	West: t3z,
-	North: t4z,
+  East: t1z,
+  South: t2z,
+  West: t3z,
+  North: t4z
 };
 const dragonImages = {
-	White: t5z,
-	Green: t6z,
-	Red: t7z,
+  White: t5z,
+  Green: t6z,
+  Red: t7z
 };
 
-export function getTileVanillaImage(tile: TileVanilla) {
-	switch (tile.suit) {
-		case "Characters":
-			return characterImages[tile.rank - 1];
-		case "Circles":
-			return circleImages[tile.rank - 1];
-		case "Bamboos":
-			return bambooImages[tile.rank - 1];
-		case "Wind":
-			return windImages[tile.rank];
-		case "Dragon":
-			return dragonImages[tile.rank];
-	}
+export function getTileVanillaImage(tile: TileVanilla): string {
+  switch (tile.suit) {
+    case "Characters":
+      return characterImages[tile.rank - 1];
+    case "Circles":
+      return circleImages[tile.rank - 1];
+    case "Bamboos":
+      return bambooImages[tile.rank - 1];
+    case "Wind":
+      return windImages[tile.rank];
+    case "Dragon":
+      return dragonImages[tile.rank];
+  }
 }
 
-export function getTileImage(tile: Tile | undefined) {
-	if (tile === undefined) {
-		return blank;
-	}
-	if (tile.red) {
-		if (tile.tile.suit === "Characters" && tile.tile.rank === 5) {
-			return t0m;
-		}
-		if (tile.tile.suit === "Circles" && tile.tile.rank === 5) {
-			return t0p;
-		}
-		if (tile.tile.suit === "Bamboos" && tile.tile.rank === 5) {
-			return t0s;
-		}
-	}
-	return getTileVanillaImage(tile.tile);
+export function getTileImage(tile: Tile | undefined): string {
+  if (tile === undefined) {
+    return blank;
+  }
+  if (tile.red) {
+    if (tile.tile.suit === "Characters" && tile.tile.rank === 5) {
+      return t0m;
+    }
+    if (tile.tile.suit === "Circles" && tile.tile.rank === 5) {
+      return t0p;
+    }
+    if (tile.tile.suit === "Bamboos" && tile.tile.rank === 5) {
+      return t0s;
+    }
+  }
+  return getTileVanillaImage(tile.tile);
 }

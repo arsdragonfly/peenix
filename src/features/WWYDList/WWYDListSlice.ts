@@ -7,7 +7,7 @@ interface WWYDListState {
 }
 
 const initialState: WWYDListState = {
-  WWYDList: [],
+  WWYDList: []
 };
 
 export const WWYDListSlice = createSlice({
@@ -19,8 +19,8 @@ export const WWYDListSlice = createSlice({
     },
     deleteWWYD: (state, action: PayloadAction<WWYD["id"]>) => {
       state.WWYDList = state.WWYDList.filter((t) => t.id !== action.payload);
-    },
-  },
+    }
+  }
 });
 
 export const { addWWYD, deleteWWYD } = WWYDListSlice.actions;
