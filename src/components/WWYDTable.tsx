@@ -1,6 +1,5 @@
 // prettier-ignore
-import { Paper, Table, TableBody, TableCell, TableHead, TableRow, useMediaQuery } from '@mui/material'
-import { Theme } from "@mui/material/styles";
+import { Paper, Table, TableBody, TableCell, TableHead, TableRow, useMediaQuery, useTheme } from '@mui/material'
 import { makeStyles } from "@mui/styles";
 import { WWYD } from "../model";
 import { useAppSelector } from "../hooks";
@@ -10,9 +9,8 @@ import WWYDComponent from "./WWYDComponent";
 export const WWYDTable: React.FC = () => {
   const classes = useStyles();
   const WWYDList = useAppSelector(selectWWYDList);
-  const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down('md')
-  );
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Paper className={classes.paper}>

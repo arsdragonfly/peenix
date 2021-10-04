@@ -4,10 +4,10 @@ import {
   TableRow,
   Box,
   Container,
-  useMediaQuery
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Theme } from "@mui/material/styles";
 import * as React from "react";
 import { WWYD } from "../model";
 import TileBox from "./Tile";
@@ -42,9 +42,8 @@ const DiscardTileBox: React.FC<Tile.Props> = (props: Tile.Props) => {
 const WWYDComponent: React.FC<Props> = (props: Props) => {
   const { wwyd } = props;
   const dispatch = useAppDispatch();
-  const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down('md')
-  );
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <TableRow key={wwyd.id} hover>
