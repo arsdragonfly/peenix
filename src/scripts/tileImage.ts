@@ -49,7 +49,13 @@ import t0s from "../tile_images/Sou5-Dora.png";
 
 import blank from "../tile_images/Blank.png";
 
-import { Tile, TileVanilla } from "../model/tile";
+import {
+  Tile,
+  TileVanilla,
+  TileSuit,
+  TileWind,
+  TileDragon
+} from "../model/tile";
 
 const characterImages = [t1m, t2m, t3m, t4m, t5m, t6m, t7m, t8m, t9m];
 
@@ -58,28 +64,28 @@ const circleImages = [t1p, t2p, t3p, t4p, t5p, t6p, t7p, t8p, t9p];
 const bambooImages = [t1s, t2s, t3s, t4s, t5s, t6s, t7s, t8s, t9s];
 
 const windImages = {
-  East: t1z,
-  South: t2z,
-  West: t3z,
-  North: t4z
+  [TileWind.East]: t1z,
+  [TileWind.South]: t2z,
+  [TileWind.West]: t3z,
+  [TileWind.North]: t4z
 };
 const dragonImages = {
-  White: t5z,
-  Green: t6z,
-  Red: t7z
+  [TileDragon.White]: t5z,
+  [TileDragon.Green]: t6z,
+  [TileDragon.Red]: t7z
 };
 
 export function getTileVanillaImage(tile: TileVanilla): string {
   switch (tile.suit) {
-    case "Characters":
+    case TileSuit.Characters:
       return characterImages[tile.rank - 1];
-    case "Circles":
+    case TileSuit.Circles:
       return circleImages[tile.rank - 1];
-    case "Bamboos":
+    case TileSuit.Bamboos:
       return bambooImages[tile.rank - 1];
-    case "Wind":
+    case TileSuit.Wind:
       return windImages[tile.rank];
-    case "Dragon":
+    case TileSuit.Dragon:
       return dragonImages[tile.rank];
   }
 }

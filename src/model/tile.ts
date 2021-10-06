@@ -1,12 +1,27 @@
 import * as R from "ramda";
 
-export type TileSuit = "Characters" | "Circles" | "Bamboos" | "Wind" | "Dragon";
+export enum TileSuit {
+  Characters = "Characters",
+  Circles = "Circles",
+  Bamboos = "Bamboos",
+  Wind = "Wind",
+  Dragon = "Dragon"
+}
 
 export type TileRank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
-export type TileWind = "East" | "South" | "West" | "North";
+export enum TileWind {
+  East = 1,
+  South,
+  West,
+  North
+}
 
-export type TileDragon = "White" | "Green" | "Red";
+export enum TileDragon {
+  White = 5,
+  Green,
+  Red
+}
 
 interface TileType<S, R> {
   suit: S;
@@ -14,11 +29,11 @@ interface TileType<S, R> {
 }
 
 export type TileVanilla =
-  | TileType<"Characters", TileRank>
-  | TileType<"Circles", TileRank>
-  | TileType<"Bamboos", TileRank>
-  | TileType<"Wind", TileWind>
-  | TileType<"Dragon", TileDragon>;
+  | TileType<TileSuit.Characters, TileRank>
+  | TileType<TileSuit.Circles, TileRank>
+  | TileType<TileSuit.Bamboos, TileRank>
+  | TileType<TileSuit.Wind, TileWind>
+  | TileType<TileSuit.Dragon, TileDragon>;
 
 export interface Tile {
   tile: TileVanilla;
@@ -30,28 +45,10 @@ export function tileToReprNum(t: Tile): string {
   const tileNum = (rank: TileRank, red: boolean): number =>
     red && rank === 5 ? 0 : rank;
   switch (t.tile.suit) {
-    case "Wind":
-      switch (t.tile.rank) {
-        case "East":
-          return "1";
-        case "South":
-          return "2";
-        case "West":
-          return "3";
-        case "North":
-          return "4";
-      }
-    // dumb eslint won't figure out there's no need for break here
-    // eslint-disable-next-line
-    case "Dragon":
-      switch (t.tile.rank) {
-        case "White":
-          return "5";
-        case "Green":
-          return "6";
-        case "Red":
-          return "7";
-      }
+    case TileSuit.Wind:
+      return String(t.tile.rank);
+    case TileSuit.Dragon:
+      return String(t.tile.rank);
     // eslint-disable-next-line
     default:
       return `${tileNum(t.tile.rank, t.red)}`;
@@ -60,12 +57,12 @@ export function tileToReprNum(t: Tile): string {
 
 export function tileToReprChar(t: Tile): string {
   // find the tile's corresponding character a-la tenhou pairi.
-  const chars = {
-    Characters: "m",
-    Circles: "p",
-    Bamboos: "s",
-    Wind: "z",
-    Dragon: "z"
+  const chars: { [key in TileSuit]: string } = {
+    [TileSuit.Characters]: "m",
+    [TileSuit.Circles]: "p",
+    [TileSuit.Bamboos]: "s",
+    [TileSuit.Wind]: "z",
+    [TileSuit.Dragon]: "z"
   };
   return chars[t.tile.suit];
 }
@@ -74,26 +71,31 @@ export function parseTile(s: string): Tile | undefined {
   // parse a single tile, e.g. "1s"
   if (s[1] === "z") {
     const tileVanillaMap: { [key: string]: TileVanilla } = {
-      1: { suit: "Wind", rank: "East" },
-      2: { suit: "Wind", rank: "South" },
-      3: { suit: "Wind", rank: "West" },
-      4: { suit: "Wind", rank: "North" },
-      5: { suit: "Dragon", rank: "White" },
-      6: { suit: "Dragon", rank: "Green" },
-      7: { suit: "Dragon", rank: "Red" }
+      1: { suit: TileSuit.Wind, rank: TileWind.East },
+      2: { suit: TileSuit.Wind, rank: TileWind.South },
+      3: { suit: TileSuit.Wind, rank: TileWind.West },
+      4: { suit: TileSuit.Wind, rank: TileWind.North },
+      5: { suit: TileSuit.Dragon, rank: TileDragon.White },
+      6: { suit: TileSuit.Dragon, rank: TileDragon.Green },
+      7: { suit: TileSuit.Dragon, rank: TileDragon.Red }
     };
     const t: TileVanilla | undefined = tileVanillaMap[s[0]];
     if (t !== undefined) {
       return { tile: t, red: false };
     }
   } else {
-    const suitMap: { [key: string]: "Characters" | "Circles" | "Bamboos" } = {
-      m: "Characters",
-      p: "Circles",
-      s: "Bamboos"
+    const suitMap: {
+      [key: string]: TileSuit.Characters | TileSuit.Circles | TileSuit.Bamboos;
+    } = {
+      m: TileSuit.Characters,
+      p: TileSuit.Circles,
+      s: TileSuit.Bamboos
     };
-    const suit: "Characters" | "Circles" | "Bamboos" | undefined =
-      suitMap[s[1]];
+    const suit:
+      | TileSuit.Characters
+      | TileSuit.Circles
+      | TileSuit.Bamboos
+      | undefined = suitMap[s[1]];
     if (suit !== undefined) {
       if (s[0] === "0") {
         return { tile: { suit, rank: 5 }, red: true };
@@ -112,9 +114,9 @@ export function parseTile(s: string): Tile | undefined {
         const rank: TileRank | undefined = rankMap[s[0]];
         if (rank !== undefined) {
           const t:
-            | TileType<"Characters", TileRank>
-            | TileType<"Circles", TileRank>
-            | TileType<"Bamboos", TileRank> = {
+            | TileType<TileSuit.Characters, TileRank>
+            | TileType<TileSuit.Circles, TileRank>
+            | TileType<TileSuit.Bamboos, TileRank> = {
             suit,
             rank
           };
@@ -143,3 +145,161 @@ export function parseTiles(s: string): Tile[] {
   }
   return tiles;
 }
+
+export const applyRed =
+  (red: boolean) =>
+  (tile: TileVanilla): Tile => {
+    if (
+      tile.suit === TileSuit.Characters ||
+      tile.suit === TileSuit.Circles ||
+      tile.suit === TileSuit.Bamboos
+    ) {
+      if (red && tile.rank === 5) {
+        return {
+          tile: tile,
+          red: true
+        };
+      }
+    }
+    return {
+      tile: tile,
+      red: false
+    };
+  };
+
+const nextTileRank: { [key in TileRank]: TileRank } = {
+  1: 2,
+  2: 3,
+  3: 4,
+  4: 5,
+  5: 6,
+  6: 7,
+  7: 8,
+  8: 9,
+  9: 1
+};
+
+const nextNextTileRank: { [key in TileRank]: TileRank } = {
+  1: 3,
+  2: 4,
+  3: 5,
+  4: 6,
+  5: 7,
+  6: 8,
+  7: 9,
+  8: 1,
+  9: 2
+};
+
+const prevTileRank: { [key in TileRank]: TileRank } = {
+  1: 9,
+  2: 1,
+  3: 2,
+  4: 3,
+  5: 4,
+  6: 5,
+  7: 6,
+  8: 7,
+  9: 8
+};
+
+const prevPrevTileRank: { [key in TileRank]: TileRank } = {
+  1: 8,
+  2: 9,
+  3: 1,
+  4: 2,
+  5: 3,
+  6: 4,
+  7: 5,
+  8: 6,
+  9: 7
+};
+
+const nextTileWind: { [key in TileWind]: TileWind } = {
+  [TileWind.East]: TileWind.South,
+  [TileWind.South]: TileWind.West,
+  [TileWind.West]: TileWind.North,
+  [TileWind.North]: TileWind.East
+};
+
+const nextNextTileWind: { [key in TileWind]: TileWind } = {
+  [TileWind.East]: TileWind.West,
+  [TileWind.South]: TileWind.North,
+  [TileWind.West]: TileWind.East,
+  [TileWind.North]: TileWind.South
+};
+
+const prevTileWind: { [key in TileWind]: TileWind } = {
+  [TileWind.East]: TileWind.North,
+  [TileWind.South]: TileWind.East,
+  [TileWind.West]: TileWind.South,
+  [TileWind.North]: TileWind.West
+};
+
+const prevPrevTileWind = nextNextTileWind;
+
+const nextTileDragon: { [key in TileDragon]: TileDragon } = {
+  [TileDragon.White]: TileDragon.Green,
+  [TileDragon.Green]: TileDragon.Red,
+  [TileDragon.Red]: TileDragon.White
+};
+
+const prevTileDragon: { [key in TileDragon]: TileDragon } = {
+  [TileDragon.White]: TileDragon.Red,
+  [TileDragon.Green]: TileDragon.White,
+  [TileDragon.Red]: TileDragon.Green
+};
+
+const nextNextTileDragon = nextTileDragon;
+
+const prevPrevTileDragon = prevTileDragon;
+
+const transformTile =
+  (
+    numberTileTransformer: { [key in TileRank]: TileRank },
+    windTileTransformer: { [key in TileWind]: TileWind },
+    dragonTileTransformer: { [key in TileDragon]: TileDragon }
+  ) =>
+  (tile: TileVanilla): TileVanilla => {
+    if (
+      tile.suit === TileSuit.Characters ||
+      tile.suit === TileSuit.Circles ||
+      tile.suit === TileSuit.Bamboos
+    ) {
+      return {
+        ...tile,
+        rank: numberTileTransformer[tile.rank]
+      };
+    } else if (tile.suit === TileSuit.Wind) {
+      return {
+        ...tile,
+        rank: windTileTransformer[tile.rank]
+      };
+    } else {
+      return {
+        ...tile,
+        rank: dragonTileTransformer[tile.rank]
+      };
+    }
+  };
+
+export const nextTile = transformTile(
+  nextTileRank,
+  nextTileWind,
+  nextTileDragon
+);
+export const nextNextTile = transformTile(
+  nextNextTileRank,
+  nextNextTileWind,
+  nextNextTileDragon
+);
+export const prevTile = transformTile(
+  prevTileRank,
+  prevTileWind,
+  prevTileDragon
+);
+export const prevPrevTile = transformTile(
+  prevPrevTileRank,
+  prevPrevTileWind,
+  prevPrevTileDragon
+);
