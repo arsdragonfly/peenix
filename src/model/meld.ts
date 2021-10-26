@@ -14,7 +14,7 @@ interface MeldDisplayElementType<O, T> {
   tile: T;
 }
 
-enum MeldDisplayOrientation {
+export enum MeldDisplayOrientation {
   Vertical = "Vertical",
   VerticalFlipped = "VerticalFlipped", // only used for closed kan
   Horizontal = "Horizontal",
